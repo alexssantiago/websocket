@@ -4,18 +4,6 @@ using WebSocket.SignalRChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
-{
-    builder
-   .AllowAnyMethod()
-   .AllowAnyHeader()
-   .AllowCredentials()
-   .WithOrigins("http://localhost:4200")
-   .SetIsOriginAllowedToAllowWildcardSubdomains()
-   .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-   .WithHeaders("Authorization", "Content-Type", "x-requested-with");
-}));
-
 builder.Services.AddSignalR();
 
 builder.Services.AddHealthChecks();
@@ -30,8 +18,6 @@ app.UseHealthChecks("/health", new HealthCheckOptions
 {
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
-
-app.UseCors("CorsPolicy");
 
 app.MapHub<LiveChatHub>("/live-chat");
 

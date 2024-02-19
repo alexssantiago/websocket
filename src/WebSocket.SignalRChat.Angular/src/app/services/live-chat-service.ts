@@ -28,7 +28,7 @@ export class LiveChatService {
     public initializeNewUserConnectionAsync(userName: string): Promise<void> {
         this._currentUserName = userName;
         this._hubConnection = new signalR.HubConnectionBuilder()
-                                .withUrl('http://localhost:5123/live-chat')
+                                .withUrl('https://localhost:10000/live-chat')
                                 .build();
 
         this.assignNewMessageReceived();
